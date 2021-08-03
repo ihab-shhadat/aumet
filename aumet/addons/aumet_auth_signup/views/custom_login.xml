@@ -1,0 +1,237 @@
+<odoo>
+    <data>
+        <template id="login_layout" inherit_id="web.login_layout" name="Login Layout Inherit">
+            <xpath expr="." position="inside">
+                <link rel="stylesheet" href="../aumet_auth_signup/static/src/css/signup_style.css"/>
+            </xpath>
+            <xpath expr="//t[@t-set='body_classname']" position="after">
+                <t t-set="body_classname"
+                   t-value="'kt_body header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable'"/>
+            </xpath>
+
+            <xpath expr="//div[hasclass('container')]" position="attributes">
+                <attribute name="class">d-flex flex-column flex-root</attribute>
+            </xpath>
+            <xpath expr="//div[hasclass('card-body')]/div[1]" position="replace"/>
+            <xpath expr="//div[@t-attf-class='card border-0 mx-auto bg-100 {{login_card_classes}} o_database_list']"
+                   position="inside">
+                <div class="login-aside d-flex flex-column flex-row-auto hide-mobile">
+
+                    <div class="d-flex flex-column-auto flex-column pt-lg-20 pt-10">
+                        <h1 class="font-weight-bolder text-center font-size-h1 text-primary line-height-0 pt-lg-15 pb-8"
+                            style="font-size: 3.5rem !important;">
+                            Aumet
+                            <span class="font-weight-bolder text-dark">Marketplace</span>
+                        </h1>
+                        <h3 class="font-weight-light text-center font-size-h2 text-dark-75 line-height-lg p-20">
+                            Connecting healthcare end users and distributors through the largest online healthcare B2B
+                            marketplace
+                        </h3>
+                    </div>
+                    <div class="aside-img d-flex flex-row-fluid bgi-no-repeat bgi-position-x-center p-10"
+                         style="background-position-y: 100%; background-image: url('../aumet_auth_signup/static/src/img/undraw_medicine_b1ol.svg');">
+                    </div>
+
+                </div>
+            </xpath>
+
+            <xpath expr="//div[@t-if='not disable_footer']" position="after">
+                <div class="supportButton" data-toggle="modal" data-target="#support_modal">
+                    <i class="la la-headset la-2x text-white"></i>
+                </div>
+                <div class="modal" id="support_modal" style="display: none;" aria-hidden="true">
+                    <div class="modal-dialog chat-modal-class-document" role="document">
+                        <div class="modal-content">
+
+                            <div class="card card-custom">
+
+                                <div class="card-header align-items-center px-4 py-3">
+                                    <div class=" flex-grow-1">
+                                        <div class="text-dark-75 font-weight-bold font-size-h5 support-modal-title">
+                                            Customer Support
+                                        </div>
+                                    </div>
+                                    <div class="text-right flex-grow-1">
+                                        <button type="button" class="btn btn-clean btn-sm btn-icon btn-icon-md"
+                                                data-dismiss="modal">
+                                            <i class="ki ki-close icon-1x"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <form method="POST" action="/web/notification/support" class="modalForm"
+                                      id="supportModalForm" novalidate="novalidate">
+
+                                    <div class="card-body">
+                                        <div class="form-group fv-plugins-icon-container">
+                                            <label class="support-modal-text">Email:</label>
+                                            <input name="supportEmail" type="email" value="" class="form-control"
+                                                   placeholder="john@example.com"/>
+                                        </div>
+                                        <div class="form-group fv-plugins-icon-container">
+                                            <label class="support-modal-text">Telephone no:</label>
+                                            <input name="supportPhone" type="number" value="" class="form-control"
+                                                   placeholder="eg 00977442424242"/>
+                                        </div>
+                                        <div class="form-group row" style="margin-bottom: 0px;">
+                                            <label class="col-5 col-form-label support-modal-text">Request a Call:
+                                            </label>
+                                            <div class="col-3">
+                                                <span class="switch switch-icon">
+                                                    <label>
+                                                        <input type="checkbox" name="requestCall" id="requestCall"/>
+                                                        <span></span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group support-modal-select fv-plugins-icon-container">
+                                            <label class="col-form-label text-right support-modal-text">Reason:</label>
+                                            <div class="">
+                                                <select class="form-control select2 select2-hidden-accessible"
+                                                        id="supportReason" name="supportReasonId"
+                                                        data-select2-id="supportReason" tabindex="-1"
+                                                        aria-hidden="true">
+                                                    <option selected="" data-select2-id="2"></option>
+                                                    <option value="3">Account locked</option>
+                                                </select>
+                                                <span class="select2 select2-container select2-container--default"
+                                                      dir="ltr" data-select2-id="1" style="width: auto;">
+                                                    <span class="selection">
+                                                        <span class="select2-selection select2-selection--single"
+                                                              role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                              tabindex="0" aria-disabled="false"
+                                                              aria-labelledby="select2-supportReason-container">
+                                                            <span class="select2-selection__rendered"
+                                                                  id="select2-supportReason-container" role="textbox"
+                                                                  aria-readonly="true">
+                                                                <span class="select2-selection__placeholder">Please
+                                                                    Select
+                                                                </span>
+                                                            </span>
+                                                            <span class="select2-selection__arrow" role="presentation">
+                                                                <b role="presentation"></b>
+                                                            </span>
+                                                        </span>
+                                                    </span>
+                                                    <span class="dropdown-wrapper" aria-hidden="true"></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-form-label text-right support-modal-text">Message:</label>
+                                            <textarea class="form-control h-auto py-7 px-6 rounded-lg" name="message"
+                                                      placeholder="Message:" value="" style="direction: ltr;"
+                                                      rows="3"></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="card-footer align-items-center">
+
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <button type="submit" id="kt_cs_form_submit_button"
+                                                    class="btn btn-primary btn-lg text-uppercase font-weight-bold chat-send py-2 px-6">
+                                                Submit
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right d-flex justify-content-end">
+                    <div class="top-signin text-right d-flex justify-content-end pt-10 pb-lg-0 pb-10">
+                        <span class="font-weight-bold text-dark-75 font-size-h4">Facing issues in our Registration?
+                        </span>
+                        <a href="javascript:;" class="font-weight-bold text-success font-size-h4 ml-2"
+                           id="kt_login_signup"
+                           data-toggle="modal" data-target="#support_modal">Request Assistance
+                        </a>
+                    </div>
+                </div>
+                <div class="text-left d-flex justify-content-start pt-20">
+                    <a href="https://aumet.com" target="_blank">
+                    </a>
+                </div>
+                <a href="/" class="text-left justify-content-start pt-5 ">
+                    <img src="../aumet_auth_signup/static/src/img/aumet-logo.svg" class="max-h-25px max-w-150px mr-1"/>
+                    <h4 class="text-left font-size-h4 text-dark pl-10 pr-10 pt-5"
+                        style="margin-bottom: 0; margin-top: 0.25rem;">Copyright 2021 Aumet, Inc. All Rights Reserved.
+                    </h4>
+                </a>
+            </xpath>
+            <xpath expr="//div[@t-if='not disable_footer']" position="attributes">
+                <attribute name="t-if">disable_footer</attribute>
+            </xpath>
+            <xpath expr="//div[@t-attf-class='card border-0 mx-auto bg-100 {{login_card_classes}} o_database_list']"
+                   position="attributes">
+                <attribute name="t-attf-class">login login-3 wizard d-flex flex-column flex-lg-row flex-column-fluid
+                </attribute>
+                <attribute name="style"/>
+            </xpath>
+            <xpath expr="//div[hasclass('card-body')]" position="attributes">
+                <attribute name="class">login-form login-content flex-row-fluid d-flex flex-column p-10</attribute>
+            </xpath>
+        </template>
+        <template id="login" inherit_id="web.login" name="Login Inherit">
+            <xpath expr="//label[@for='db']" position="replace"/>
+            <xpath expr="//label[@for='login']" position="replace">
+                <label class="font-size-h6 font-weight-bolder text-dark">Work Email Address</label>
+            </xpath>
+            <xpath expr="//label[@for='password']" position="replace">
+                <div class="d-flex justify-content-between mt-n5">
+                    <label class="font-size-h6 font-weight-bolder text-dark pt-5">Password</label>
+                    <a t-if="reset_password_enabled" t-attf-href="/web/reset_password?{{ keep_query() }}"
+                       class="text-success font-size-h6 font-weight-bolder pt-5">Forgotten
+                        Password ?
+                    </a>
+                </div>
+            </xpath>
+            <xpath expr="//input[@name='login']" position="attributes">
+                <attribute name="placeholder">Email ...</attribute>
+                <attribute name="autocomplete">off</attribute>
+                <attribute name="autocorrect">off</attribute>
+            </xpath>
+
+            <xpath expr="//input[@name='password']" position="attributes">
+                <attribute name="placeholder">Password ...</attribute>
+            </xpath>
+            <xpath expr="//a[@href='/web/database/selector']" position="replace">
+                <a role="button" href="/web/database/selector" class="btn btn-secondary">
+                    <i class="fa fa-database" role="img" aria-label="Database" title="Database"/>
+                </a>
+            </xpath>
+
+        </template>
+
+        <template id="aumet_auth_signup_inherit" inherit_id="auth_signup.login" name="Sign Aumet">
+
+            <xpath expr="//form" position="before">
+                <div class="d-flex flex-column-auto flex-column pt-lg-40 pt-5 show-mobile">
+
+                    <a href="/" class="login-logo text-center pt-lg-25 pb-10">
+                        <img src="../aumet_auth_signup/static/src/img/aumet-logo.svg" class="max-h-70px" alt=""/>
+                    </a>
+
+
+                    <h5 class="font-weight-bolder text-center font-size-h6 text-dark line-height-xl">
+                        Connecting healthcare end users and distributors through the largest online healthcare B2B
+                        marketplace
+                    </h5>
+
+                </div>
+                <div class="pb-5 pb-lg-15">
+                    <h3 class="font-weight-bolder text-primary font-size-h1 font-size-h1-lg">Sign In</h3>
+                    <div class="text-dark-75 font-weight-bold font-size-h4 mt-5">Don't you have an account yet?
+                        <a t-if="signup_enabled" t-attf-href="/web/signup?{{ keep_query() }}">Register Now</a>
+                    </div>
+                </div>
+            </xpath>
+        </template>
+    </data>
+</odoo>
